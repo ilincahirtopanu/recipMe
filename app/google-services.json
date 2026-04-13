@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1084294358155",
+    "project_id": "recime-a48e6",
+    "firebase_url": "https://recime-a48e6-default-rtdb.firebaseio.com/",
+    "storage_bucket": "recime-a48e6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084294358155:android:4accf3cc5012bf90a4208e",
+        "android_client_info": {
+          "package_name": "com.example.recipeme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqsEE3y2GkSJsf9iWlnaXvRlr0Ylnjt5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
