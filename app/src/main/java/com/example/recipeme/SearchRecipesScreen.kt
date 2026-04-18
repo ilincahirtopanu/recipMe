@@ -1,7 +1,6 @@
 package com.example.recipeme
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,7 +8,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -27,6 +32,41 @@ import coil.compose.AsyncImage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import androidx.core.net.toUri
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+
+fun saveRecipeToFirebase(recipe: Recipe) {
+    val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+    val database = FirebaseDatabase.getInstance()
+    val ref = database.getReference("users")
+        .child(userId)
+        .child("savedRecipes")
+        .child(recipe.label.replace(" ", "_"))
+
+    val recipeMap = mapOf(
+        "label" to recipe.label,
+        "image" to recipe.image,
+        "source" to recipe.source,
+        "url" to recipe.url,
+        "calories" to recipe.calories,
+        "ingredients" to recipe.ingredientLines
+    )
+
+    ref.setValue(recipeMap)
+}
+
+fun deleteRecipeFromFirebase(recipeId: String) {
+    val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+    val ref = FirebaseDatabase.getInstance()
+        .getReference("users")
+        .child(userId)
+        .child("savedRecipes")
+        .child(recipeId)
+
+    ref.removeValue()
+}
 
 @Composable
 fun SearchRecipesScreen(
@@ -86,7 +126,7 @@ fun SearchRecipesScreen(
             else -> {
                 LazyColumn {
                     items(recipes) { recipe ->
-                        RecipeItem(recipe)
+                        RecipeItem(recipe, isSavedScreen = false)
                     }
                 }
             }
@@ -95,7 +135,7 @@ fun SearchRecipesScreen(
 }
 
 @Composable
-fun RecipeItem(recipe: Recipe) {
+fun RecipeItem(recipe: Recipe, isSavedScreen: Boolean = false) {
     val context = LocalContext.current
 
     Card(
@@ -132,6 +172,27 @@ fun RecipeItem(recipe: Recipe) {
                 text = "Source: ${recipe.source}",
                 style = MaterialTheme.typography.bodySmall
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            var isSaved by remember { mutableStateOf(isSavedScreen) }
+
+            IconButton(
+                onClick = {
+                    if (isSaved) {
+                        deleteRecipeFromFirebase(recipe.id)
+                    } else {
+                        saveRecipeToFirebase(recipe)
+                    }
+                    isSaved = !isSaved
+                }
+            ) {
+                Icon(
+                    imageVector = if (isSaved) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                    contentDescription = "Save Recipe"
+                )
+            }
+
         }
     }
 }

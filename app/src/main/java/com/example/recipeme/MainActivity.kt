@@ -63,9 +63,6 @@ fun Navigate() {
                 },
                 onSavedRecipesClick = {
                     navController.navigate("savedRecipes")
-                },
-                onAddRecipeClick = {
-                    navController.navigate("addRecipe")
                 }
             )
         }
@@ -88,10 +85,13 @@ fun Navigate() {
             )
         }
         composable("savedRecipes") {
-//            SavedRecipesScreen()
+            SavedRecipesScreen()
         }
         composable("addRecipe") {
 //            AddRecipeScreen()
+        }
+        composable("random") {
+//            RandomRecipeScreen()
         }
     }
 }
