@@ -1,5 +1,5 @@
 package com.example.recipeme
-
+import androidx.compose.ui.res.stringResource
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -69,7 +69,7 @@ fun LoginScreen2(onLoginSuccess: () -> Unit, onSignUpClick: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Text("Login to RecipMe", style = MaterialTheme.typography.headlineMedium)
+        Text(stringResource(R.string.login_title), style = MaterialTheme.typography.headlineMedium)
 
         Spacer(Modifier.height(40.dp))
 
@@ -79,7 +79,7 @@ fun LoginScreen2(onLoginSuccess: () -> Unit, onSignUpClick: () -> Unit) {
                 username = it
                 error = null
             },
-            label = { Text("Email") },
+            label = { Text(stringResource(R.string.email)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
@@ -92,7 +92,7 @@ fun LoginScreen2(onLoginSuccess: () -> Unit, onSignUpClick: () -> Unit) {
                 password = it
                 error = null
             },
-            label = { Text("Password") },
+            label = { Text(stringResource(R.string.password)) },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
@@ -104,7 +104,7 @@ fun LoginScreen2(onLoginSuccess: () -> Unit, onSignUpClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Remember Me", style = MaterialTheme.typography.bodyMedium)
+            Text(stringResource(R.string.remember_me), style = MaterialTheme.typography.bodyMedium)
             Spacer(Modifier.weight(1f))
             Switch(
                 checked = rememberMe,
@@ -148,7 +148,7 @@ fun LoginScreen2(onLoginSuccess: () -> Unit, onSignUpClick: () -> Unit) {
                         }
                         onLoginSuccess()
                     } catch (e: Exception) {
-                        error = e.message ?: "Login failed"
+                        error = e.message ?: context.getString(R.string.login_failed)
                     } finally {
                         isLoading = false
                     }
@@ -157,7 +157,7 @@ fun LoginScreen2(onLoginSuccess: () -> Unit, onSignUpClick: () -> Unit) {
             enabled = username.isNotBlank() && password.isNotBlank(),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Login")
+            Text(stringResource(R.string.login))
         }
 
         Spacer(Modifier.height(20.dp))
@@ -172,7 +172,7 @@ fun LoginScreen2(onLoginSuccess: () -> Unit, onSignUpClick: () -> Unit) {
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Create Account")
+            Text(stringResource(R.string.create_account))
         }
 
         if (isLoading) {

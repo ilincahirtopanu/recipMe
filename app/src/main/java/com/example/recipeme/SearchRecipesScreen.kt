@@ -1,5 +1,6 @@
 package com.example.recipeme
 
+import androidx.compose.ui.res.stringResource
 import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -95,7 +96,7 @@ fun SearchRecipesScreen(
             }
             recipes = result
         } catch (e: Exception) {
-            errorMessage = e.message ?: "Failed to load recipes"
+            errorMessage = e.message ?: context.getString(R.string.error_loading)
         } finally {
             isLoading = false
         }
@@ -104,12 +105,14 @@ fun SearchRecipesScreen(
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
-        Text("Recipes with:", style = MaterialTheme.typography.headlineSmall)
-
+        Text(
+            text = stringResource(R.string.recipes_with),
+            style = MaterialTheme.typography.headlineSmall
+        )
         Spacer(modifier = Modifier.height(8.dp))
 
         ingredientsList.forEach {
-            Text("• $it")
+            Text(stringResource(R.string.ingredient_item, it))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -169,7 +172,7 @@ fun RecipeItem(recipe: Recipe, isSavedScreen: Boolean = false) {
 
 
             Text(
-                text = "Source: ${recipe.source}",
+                text = stringResource(R.string.source, recipe.source),
                 style = MaterialTheme.typography.bodySmall
             )
 
@@ -189,7 +192,7 @@ fun RecipeItem(recipe: Recipe, isSavedScreen: Boolean = false) {
             ) {
                 Icon(
                     imageVector = if (isSaved) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-                    contentDescription = "Save Recipe"
+                    contentDescription = stringResource(R.string.save_recipe)
                 )
             }
 

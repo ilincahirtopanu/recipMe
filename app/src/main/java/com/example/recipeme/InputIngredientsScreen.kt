@@ -1,5 +1,6 @@
 package com.example.recipeme
 
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
@@ -44,7 +46,7 @@ fun InputIngredientsScreen(
     var errorMessage by remember { mutableStateOf<String?>(null) }
     val recipemanager by remember { mutableStateOf(RecipeManager())}
 
-
+    val context = LocalContext.current
     // Loading ingredients
     LaunchedEffect(Unit) {
         isLoading = true
@@ -56,7 +58,7 @@ fun InputIngredientsScreen(
             }
 
         } catch (e: Exception) {
-            errorMessage = e.message ?: "Failed to load ingredients"
+            errorMessage = e.message ?: context.getString(R.string.error_loading_ingredients)
         } finally {
             isLoading = false
         }
@@ -74,7 +76,10 @@ fun InputIngredientsScreen(
             .padding(16.dp)
     ) {
 
-        Text("Select Ingredients", style = MaterialTheme.typography.headlineSmall)
+        Text(
+            text = stringResource(R.string.select_ingredients),
+            style = MaterialTheme.typography.headlineSmall
+        )
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -83,7 +88,7 @@ fun InputIngredientsScreen(
         TextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
-            label = { Text("Search ingredients") },
+            label = { Text(stringResource(R.string.search_ingredients)) },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -135,7 +140,12 @@ fun InputIngredientsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     enabled = selectedIngredients.isNotEmpty()
                 ) {
-                    Text("Search Recipes (${selectedIngredients.size})")
+                    Text(
+                        stringResource(
+                            R.string.search_recipes_count,
+                            selectedIngredients.size
+                        )
+                    )
                 }
             }
         }

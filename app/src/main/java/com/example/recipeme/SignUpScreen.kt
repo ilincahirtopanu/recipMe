@@ -1,5 +1,5 @@
 package com.example.recipeme
-
+import androidx.compose.ui.res.stringResource
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -53,7 +53,7 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Text("Sign up for RecipMe", style = MaterialTheme.typography.headlineMedium)
+        Text(stringResource(R.string.signup_title), style = MaterialTheme.typography.headlineMedium)
 
         Spacer(Modifier.height(40.dp))
 
@@ -64,7 +64,7 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
                 error = null
                 prefs.edit { putString("username", it) }
             },
-            label = { Text("Email") },
+            label = { Text(stringResource(R.string.email)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
@@ -77,7 +77,7 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
                 password = it
                 error = null
             },
-            label = { Text("Password") },
+            label = { Text(stringResource(R.string.password)) },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
@@ -91,7 +91,7 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
                 confirmPassword = it
                 error = null
             },
-            label = { Text("Confirm Password") },
+            label = { Text(stringResource(R.string.confirm_password)) },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
@@ -109,11 +109,15 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
                 scope.launch {
                     try {
                         AuthRepository.register(username, password)
-                        Toast.makeText(context, "Registration Successful!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.registration_success),
+                            Toast.LENGTH_LONG
+                        ).show()
                         AuthRepository.login(username, password)
                         onSignUpSuccess()
                     } catch (e: Exception) {
-                        error = e.message ?: "Registration failed"
+                        error = e.message ?: context.getString(R.string.registration_failed)
                     } finally {
                         isLoading = false
                     }
@@ -122,7 +126,7 @@ fun SignUpScreen(onSignUpSuccess: () -> Unit) {
             enabled = username.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank() && (password == confirmPassword),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Create Account")
+            Text(stringResource(R.string.create_account))
         }
 
         if (isLoading) {

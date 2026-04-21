@@ -1,5 +1,6 @@
 package com.example.recipeme
 
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -68,13 +69,13 @@ fun SavedRecipesScreen() {
 
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Saved Recipes", style = MaterialTheme.typography.headlineSmall)
+        Text(stringResource(R.string.saved_recipes_title), style = MaterialTheme.typography.headlineSmall)
         Spacer(modifier = Modifier.height(16.dp))
 
         if (isLoading) {
             LinearProgressIndicator()
         } else if (recipes.isEmpty()) {
-            Text("No saved recipes yet")
+            Text(stringResource(R.string.no_saved_recipes))
         } else {
             LazyColumn {
                 items(recipes) { recipe ->

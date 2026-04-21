@@ -1,5 +1,6 @@
 package com.example.recipeme
 
+import androidx.compose.ui.res.stringResource
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
@@ -50,13 +51,21 @@ fun HomeScreen(
         val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
         Text(
-            text = "RecipMe",
+            text = stringResource(R.string.app_name),
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 32.dp)
         )
 
-        Button(content = { Text("Find a recipe for you!") }, onClick = {onInputIngredientsClick()})
-        Button(content = { Text("Your saved recipes") }, onClick = {onSavedRecipesClick()})
+        Button(
+            content = { Text(stringResource(R.string.find_recipe)) },
+            onClick = { onInputIngredientsClick() }
+        )
+
+        Button(
+            content = { Text(stringResource(R.string.saved_recipes)) },
+            onClick = { onSavedRecipesClick() }
+        )
+
 
         var lastShakeTime by remember { mutableStateOf(0L) }
         val recipeManager = remember { RecipeManager() }
@@ -73,8 +82,8 @@ fun HomeScreen(
 
                     val currentTime = System.currentTimeMillis()
 
-                    if (acceleration > 15) { // threshold (tweak if needed)
-                        if (currentTime - lastShakeTime > 1000) { // debounce (1 sec)
+                    if (acceleration > 15) {
+                        if (currentTime - lastShakeTime > 1000) {
                             lastShakeTime = currentTime
 
                             CoroutineScope(Dispatchers.IO).launch {
@@ -121,7 +130,7 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Shake for a random recipe!",
+            text = stringResource(R.string.shake_for_recipe),
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 15.dp)
         )

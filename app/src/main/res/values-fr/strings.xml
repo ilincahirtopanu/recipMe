@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save_recipe">Enregistrer la recette</string>
+    <string name="recipes_with">Recettes avec :</string>
+    <string name="no_saved_recipes">Aucune recette enregistrée</string>
+    <string name="saved">Enregistré !</string>
+    <string name="removed">Supprimé</string>
+    <string name="app_name">RecipMe</string>
+    <string name="find_recipe">Trouver une recette pour vous !</string>
+    <string name="saved_recipes">Vos recettes enregistrées</string>
+    <string name="shake_for_recipe">Secouez pour une recette aléatoire !</string>
+    <string name="saved_recipes_title">Recettes enregistrées</string>
+    <string name="ingredient_item">• %1$s</string>
+    <string name="source">Source : %1$s</string>
+    <string name="error_loading">Impossible de charger les recettes</string>
+    <string name="signup_title">Créer un compte RecipMe</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="confirm_password">Confirmer le mot de passe</string>
+    <string name="create_account">Créer un compte</string>
+    <string name="registration_success">Inscription réussie !</string>
+    <string name="registration_failed">Échec de le inscription</string>
+    <string name="login_title">Se connecter à RecipMe</string>
+    <string name="login">Connexion</string>
+    <string name="login_failed">Échec de la connexion</string>
+    <string name="remember_me">Se souvenir de moi</string>
+    <string name="select_ingredients">Sélectionner les ingrédients</string>
+    <string name="search_ingredients">Rechercher des ingrédients</string>
+    <string name="error_loading_ingredients">Impossible de charger les ingrédients</string>
+    <string name="search_recipes_count">Rechercher des recettes (%1$d)</string>
+</resources>

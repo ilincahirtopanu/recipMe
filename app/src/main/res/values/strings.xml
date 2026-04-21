@@ -1,3 +1,30 @@
 <resources>
-    <string name="app_name">RecipeMe</string>
+    <string name="app_name">RecipMe</string>
+    <string name="find_recipe">Find a recipe for you!</string>
+    <string name="saved_recipes">Your saved recipes</string>
+    <string name="shake_for_recipe">Shake for a random recipe!</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="recipes_with">Recipes with:</string>
+    <string name="no_saved_recipes">No saved recipes yet</string>
+    <string name="saved">Saved!</string>
+    <string name="removed">Removed</string>
+    <string name="saved_recipes_title">Saved Recipes</string>
+    <string name="ingredient_item">• %1$s</string>
+    <string name="source">Source: %1$s</string>
+    <string name="error_loading">Failed to load recipes</string>
+    <string name="signup_title">Sign up for RecipMe</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="registration_success">Registration Successful!</string>
+    <string name="registration_failed">Registration failed</string>
+    <string name="login_title">Login to RecipMe</string>
+    <string name="login">Login</string>
+    <string name="login_failed">Login failed</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="select_ingredients">Select Ingredients</string>
+    <string name="search_ingredients">Search ingredients</string>
+    <string name="error_loading_ingredients">Failed to load ingredients</string>
+    <string name="search_recipes_count">Search Recipes (%1$d)</string>
 </resources>
